@@ -221,7 +221,7 @@ const RegisterForm = ({ user }: { user: User }) => {
 
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
-            <h2 className="sub-header">Medical Information</h2>
+            <h2 className="sub-header">Loan Information</h2>
           </div>
 
           {/* PRIMARY CARE PHYSICIAN */}
