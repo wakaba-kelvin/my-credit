@@ -187,7 +187,7 @@ const RegisterForm = ({ user }: { user: User }) => {
               control={form.control}
               name="address"
               label="Address"
-              placeholder="14 street, New york, NY - 5101"
+              placeholder="32 Nairobi"
             />
 
             <CustomFormField
@@ -205,15 +205,15 @@ const RegisterForm = ({ user }: { user: User }) => {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="emergencyContactName"
-              label="Emergency contact name"
-              placeholder="Guardian's name"
+              label="Next of kin"
+              placeholder="Next of kin's name"
             />
 
             <CustomFormField
               fieldType={FormFieldType.PHONE_INPUT}
               control={form.control}
               name="emergencyContactNumber"
-              label="Emergency contact number"
+              label="Next of kin Number"
               placeholder="(555) 123-4567"
             />
           </div>
@@ -229,8 +229,8 @@ const RegisterForm = ({ user }: { user: User }) => {
             fieldType={FormFieldType.SELECT}
             control={form.control}
             name="primaryPhysician"
-            label="Primary care physician"
-            placeholder="Select a physician"
+            label="Team Leader"
+            placeholder="Select your team leader"
           >
             {Doctors.map((doctor, i) => (
               <SelectItem key={doctor.name + i} value={doctor.name}>
@@ -254,16 +254,16 @@ const RegisterForm = ({ user }: { user: User }) => {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="insuranceProvider"
-              label="Insurance provider"
-              placeholder="BlueCross BlueShield"
+              label="Employer"
+              placeholder="TSC"
             />
 
             <CustomFormField
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="insurancePolicyNumber"
-              label="Insurance policy number"
-              placeholder="ABC123456789"
+              label="PF number"
+              placeholder="Payslip code / Pf number"
             />
           </div>
 
@@ -273,16 +273,16 @@ const RegisterForm = ({ user }: { user: User }) => {
               fieldType={FormFieldType.TEXTAREA}
               control={form.control}
               name="allergies"
-              label="Allergies (if any)"
-              placeholder="Peanuts, Penicillin, Pollen"
+              label="Top-up loan (if has an existing loan)"
+              placeholder="Amount of the existing loan"
             />
 
             <CustomFormField
               fieldType={FormFieldType.TEXTAREA}
               control={form.control}
               name="currentMedication"
-              label="Current medications"
-              placeholder="Ibuprofen 200mg, Levothyroxine 50mcg"
+              label="loan application amount"
+              placeholder="100,000"
             />
           </div>
 
@@ -292,16 +292,16 @@ const RegisterForm = ({ user }: { user: User }) => {
               fieldType={FormFieldType.TEXTAREA}
               control={form.control}
               name="familyMedicalHistory"
-              label=" Family medical history (if relevant)"
-              placeholder="Mother had brain cancer, Father has hypertension"
+              label=" loan duration"
+              placeholder="e.g 120 months"
             />
 
             <CustomFormField
               fieldType={FormFieldType.TEXTAREA}
               control={form.control}
               name="pastMedicalHistory"
-              label="Past medical history"
-              placeholder="Appendectomy in 2015, Asthma diagnosis in childhood"
+              label="mpesa statement"
+              placeholder="working on this feature"
             />
           </div>
         </section>
@@ -355,15 +355,15 @@ const RegisterForm = ({ user }: { user: User }) => {
             fieldType={FormFieldType.CHECKBOX}
             control={form.control}
             name="treatmentConsent"
-            label="I consent to receive treatment for my health condition."
+            label="I consent to fill the agreed information with the client."
           />
 
           <CustomFormField
             fieldType={FormFieldType.CHECKBOX}
             control={form.control}
             name="disclosureConsent"
-            label="I consent to the use and disclosure of my health
-            information for treatment purposes."
+            label="I consent not to disclosure clients
+            information and also uphold privacy ."
           />
 
           <CustomFormField
