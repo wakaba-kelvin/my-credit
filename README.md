@@ -183,6 +183,9 @@ const config = {
           600: "#76828D",
           700: "#ABB8C4",
         },
+        yellow:{
+          250: "#FCE013",
+        }
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
@@ -446,7 +449,7 @@ export default config;
   }
 
   .shad-select-trigger {
-    @apply bg-dark-400  placeholder:text-dark-600 border-dark-500 h-11 focus:ring-0 focus:ring-offset-0 !important;
+    @apply bg-dark-400  placeholder:text-light-200 border-dark-500 h-11 focus:ring-0 focus:ring-offset-0 !important;
   }
 
   .shad-select-content {
