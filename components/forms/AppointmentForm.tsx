@@ -134,9 +134,7 @@ export const AppointmentForm = ({
         {type === "create" && (
           <section className="mb-12 space-y-4">
             <h1 className="header">Loan Approval Request</h1>
-            <p className="text-dark-700">
-              Request a new loan approval.
-            </p>
+            <p className="text-dark-700">Request a new loan approval.</p>
           </section>
         )}
 
@@ -147,7 +145,7 @@ export const AppointmentForm = ({
               control={form.control}
               name="primaryPhysician"
               label="Team leader"
-              placeholder="Select a doctor"
+              placeholder="Select a team leader"
             >
               {Doctors.map((doctor, i) => (
                 <SelectItem key={doctor.name + i} value={doctor.name}>
