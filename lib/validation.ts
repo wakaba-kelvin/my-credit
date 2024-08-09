@@ -78,7 +78,7 @@ export const PatientFormValidation = z.object({
 
 export const CreateAppointmentSchema = z.object({
   primaryPhysician: z.string().min(2, "Select at least one doctor"),
-  schedule: z.coerce.date(),
+  pay: z.coerce.date(),
   reason: z
     .string()
     .min(2, "Reason must be at least 2 characters")
@@ -87,9 +87,9 @@ export const CreateAppointmentSchema = z.object({
   cancellationReason: z.string().optional(),
 });
 
-export const ScheduleAppointmentSchema = z.object({
+export const PayAppointmentSchema = z.object({
   primaryPhysician: z.string().min(2, "Select at least one doctor"),
-  schedule: z.coerce.date(),
+  pay: z.coerce.date(),
   reason: z.string().optional(),
   note: z.string().optional(),
   cancellationReason: z.string().optional(),
@@ -97,7 +97,7 @@ export const ScheduleAppointmentSchema = z.object({
 
 export const CancelAppointmentSchema = z.object({
   primaryPhysician: z.string().min(2, "Select at least one doctor"),
-  schedule: z.coerce.date(),
+  pay: z.coerce.date(),
   reason: z.string().optional(),
   note: z.string().optional(),
   cancellationReason: z
@@ -113,6 +113,6 @@ export function getAppointmentSchema(type: string) {
     case "cancel":
       return CancelAppointmentSchema;
     default:
-      return ScheduleAppointmentSchema;
+      return PayAppointmentSchema;
   }
 }

@@ -31,7 +31,7 @@ export const AppointmentForm = ({
 }: {
   userId: string;
   patientId: string;
-  type: "create" | "schedule" | "cancel";
+  type: "create" | "pay" | "cancel";
   appointment?: Appointment;
   setOpen?: Dispatch<SetStateAction<boolean>>;
 }) => {
@@ -44,9 +44,7 @@ export const AppointmentForm = ({
     resolver: zodResolver(AppointmentFormValidation),
     defaultValues: {
       primaryPhysician: appointment ? appointment?.primaryPhysician : "",
-      schedule: appointment
-        ? new Date(appointment?.schedule!)
-        : new Date(Date.now()),
+      pay: appointment ? new Date(appointment?.pay!) : new Date(Date.now()),
       reason: appointment ? appointment.reason : "",
       note: appointment?.note || "",
       cancellationReason: appointment?.cancellationReason || "",
@@ -60,8 +58,8 @@ export const AppointmentForm = ({
 
     let status;
     switch (type) {
-      case "schedule":
-        status = "scheduled";
+      case "pay":
+        status = "payd";
         break;
       case "cancel":
         status = "cancelled";
@@ -76,7 +74,7 @@ export const AppointmentForm = ({
           userId,
           patient: patientId,
           primaryPhysician: values.primaryPhysician,
-          schedule: new Date(values.schedule),
+          pay: new Date(values.pay),
           reason: values.reason!,
           status: status as Status,
           note: values.note,
@@ -96,7 +94,7 @@ export const AppointmentForm = ({
           appointmentId: appointment?.$id!,
           appointment: {
             primaryPhysician: values.primaryPhysician,
-            schedule: new Date(values.schedule),
+            pay: new Date(values.pay),
             status: status as Status,
             cancellationReason: values.cancellationReason,
           },
@@ -121,8 +119,8 @@ export const AppointmentForm = ({
     case "cancel":
       buttonLabel = "Cancel Appointment";
       break;
-    case "schedule":
-      buttonLabel = "Schedule Appointment";
+    case "pay":
+      buttonLabel = "Schedu Appointment";
       break;
     default:
       buttonLabel = "Submit Apppointment";
@@ -166,7 +164,7 @@ export const AppointmentForm = ({
             <CustomFormField
               fieldType={FormFieldType.DATE_PICKER}
               control={form.control}
-              name="schedule"
+              name="Pay"
               label="Loan application date"
               showTimeSelect
               dateFormat="MM/dd/yyyy  -  h:mm aa"
@@ -181,7 +179,7 @@ export const AppointmentForm = ({
                 name="reason"
                 label="Loan type"
                 placeholder="new loan, top-up...e.t.c"
-                disabled={type === "schedule"}
+                disabled={type === "pay"}
               />
 
               <CustomFormField
@@ -190,7 +188,7 @@ export const AppointmentForm = ({
                 name="note"
                 label="Comments/notes"
                 placeholder="urgent loan"
-                disabled={type === "schedule"}
+                disabled={type === "pay"}
               />
             </div>
           </>

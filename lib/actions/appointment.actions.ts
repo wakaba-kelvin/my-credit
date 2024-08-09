@@ -41,9 +41,9 @@ export const getRecentAppointmentList = async () => {
       [Query.orderDesc("$createdAt")]
     );
 
-    // const scheduledAppointments = (
+    // const paydAppointments = (
     //   appointments.documents as Appointment[]
-    // ).filter((appointment) => appointment.status === "scheduled");
+    // ).filter((appointment) => appointment.status === "payd");
 
     // const pendingAppointments = (
     //   appointments.documents as Appointment[]
@@ -55,14 +55,14 @@ export const getRecentAppointmentList = async () => {
 
     // const data = {
     //   totalCount: appointments.total,
-    //   scheduledCount: scheduledAppointments.length,
+    //   paydCount: paydAppointments.length,
     //   pendingCount: pendingAppointments.length,
     //   cancelledCount: cancelledAppointments.length,
     //   documents: appointments.documents,
     // };
 
     const initialCounts = {
-      scheduledCount: 0,
+      paydCount: 0,
       pendingCount: 0,
       cancelledCount: 0,
     };
@@ -70,8 +70,8 @@ export const getRecentAppointmentList = async () => {
     const counts = (appointments.documents as Appointment[]).reduce(
       (acc, appointment) => {
         switch (appointment.status) {
-          case "scheduled":
-            acc.scheduledCount++;
+          case "payd":
+            acc.paydCount++;
             break;
           case "pending":
             acc.pendingCount++;
@@ -125,7 +125,7 @@ export const updateAppointment = async ({
   type,
 }: UpdateAppointmentParams) => {
   try {
-    // Update appointment to scheduled -> https://appwrite.io/docs/references/cloud/server-nodejs/databases#updateDocument
+    // Update appointment to payd -> https://appwrite.io/docs/references/cloud/server-nodejs/databases#updateDocument
     const updatedAppointment = await databases.updateDocument(
       DATABASE_ID!,
       APPOINTMENT_COLLECTION_ID!,
@@ -135,7 +135,7 @@ export const updateAppointment = async ({
 
     if (!updatedAppointment) throw Error;
 
-    const smsMessage = `Greetings from MyCredit. ${type === "schedule" ? `Your appointment is confirmed for ${formatDateTime(appointment.schedule!, timeZone).dateTime} with Dr. ${appointment.primaryPhysician}` : `We regret to inform that your appointment for ${formatDateTime(appointment.schedule!, timeZone).dateTime} is cancelled. Reason:  ${appointment.cancellationReason}`}.`;
+    const smsMessage = `Greetings from MyCredit. ${type === "pay" ? `Your appointment is confirmed for ${formatDateTime(appointment.pay!, timeZone).dateTime} with  ${appointment.primaryPhysician}` : `We regret to inform that your appointment for ${formatDateTime(appointment.pay!, timeZone).dateTime} is cancelled. Reason:  ${appointment.cancellationReason}`}.`;
     await sendSMSNotification(userId, smsMessage);
 
     revalidatePath("/admin");

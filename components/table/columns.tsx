@@ -38,20 +38,20 @@ export const columns: ColumnDef<Appointment>[] = [
     },
   },
   {
-    accessorKey: "schedule",
+    accessorKey: "pay",
     header: "Appointment",
     cell: ({ row }) => {
       const appointment = row.original;
       return (
         <p className="text-14-regular min-w-[100px]">
-          {formatDateTime(appointment.schedule).dateTime}
+          {formatDateTime(appointment.pay).dateTime}
         </p>
       );
     },
   },
   {
     accessorKey: "primaryPhysician",
-    header: "Doctor",
+    header: "Team leader",
     cell: ({ row }) => {
       const appointment = row.original;
 
@@ -68,7 +68,7 @@ export const columns: ColumnDef<Appointment>[] = [
             height={100}
             className="size-8"
           />
-          <p className="whitespace-nowrap">Dr. {doctor?.name}</p>
+          <p className="whitespace-nowrap"> {doctor?.name}</p>
         </div>
       );
     },
@@ -85,9 +85,9 @@ export const columns: ColumnDef<Appointment>[] = [
             patientId={appointment.patient.$id}
             userId={appointment.userId}
             appointment={appointment}
-            type="schedule"
-            title="Schedule Appointment"
-            description="Please confirm the following details to schedule."
+            type="pay"
+            title="Pay Loan"
+            description="Please confirm the following details to pay the loan."
           />
           <AppointmentModal
             patientId={appointment.patient.$id}
@@ -95,7 +95,7 @@ export const columns: ColumnDef<Appointment>[] = [
             appointment={appointment}
             type="cancel"
             title="Cancel Appointment"
-            description="Are you sure you want to cancel your appointment?"
+            description="Are you sure you want to cancel your Loan?"
           />
         </div>
       );

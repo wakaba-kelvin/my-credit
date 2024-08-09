@@ -38,8 +38,8 @@ const RequestSuccess = async ({
             alt="success"
           />
           <h2 className="header mb-6 max-w-[600px] text-center">
-            Your <span className="text-green-500">loan request</span> has
-            been successfully submitted!
+            Your <span className="text-green-500">loan request</span> has been
+            successfully submitted!
           </h2>
           <p>We&apos;ll be in touch shortly to confirm.</p>
         </section>
@@ -54,7 +54,7 @@ const RequestSuccess = async ({
               height={100}
               className="size-6"
             />
-            <p className="whitespace-nowrap">Dr. {doctor?.name}</p>
+            <p className="whitespace-nowrap">{doctor?.name}</p>
           </div>
           <div className="flex gap-2">
             <Image
@@ -63,14 +63,12 @@ const RequestSuccess = async ({
               width={24}
               alt="calendar"
             />
-            <p> {formatDateTime(appointment.schedule).dateTime}</p>
+            <p> {formatDateTime(appointment.pay).dateTime}</p>
           </div>
         </section>
 
         <Button variant="outline" className="shad-primary-btn" asChild>
-          <Link href={`/patients/${userId}/new-appointment`}>
-            Loan Booking 
-          </Link>
+          <Link href={`/patients/${userId}/new-appointment`}>Loan Booking</Link>
         </Button>
 
         <p className="copyright">© 2024 MyCredit</p>

@@ -58,11 +58,11 @@ If you're getting started and need assistance or face any bugs, join our active 
 
 👉 **Register as a Patient**: Users can sign up and create a personal profile as a patient.
 
-👉 **Book a New Appointment with Doctor**: Patients can schedule appointments with doctors at their convenience and can book multiple appointments.
+👉 **Book a New Appointment with Doctor**: Patients can pay appointments with doctors at their convenience and can book multiple appointments.
 
-👉 **Manage Appointments on Admin Side**: Administrators can efficiently view and handle all scheduled appointments.
+👉 **Manage Appointments on Admin Side**: Administrators can efficiently view and handle all payd appointments.
 
-👉 **Confirm/Schedule Appointment from Admin Side**: Admins can confirm and set appointment times to ensure they are properly scheduled.
+👉 **Confirm/Pay Appointment from Admin Side**: Admins can confirm and set appointment times to ensure they are properly payd.
 
 👉 **Cancel Appointment from Admin Side**: Administrators have the ability to cancel any appointment as needed.
 
@@ -183,9 +183,9 @@ const config = {
           600: "#76828D",
           700: "#ABB8C4",
         },
-        yellow:{
+        yellow: {
           250: "#FCE013",
-        }
+        },
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
@@ -594,7 +594,7 @@ declare type SearchParamProps = {
 };
 
 declare type Gender = "male" | "female" | "other";
-declare type Status = "pending" | "scheduled" | "cancelled";
+declare type Status = "pending" | "payd" | "cancelled";
 
 declare interface CreateUserParams {
   name: string;
@@ -631,7 +631,7 @@ declare type CreateAppointmentParams = {
   patient: string;
   primaryPhysician: string;
   reason: string;
-  schedule: Date;
+  pay: Date;
   status: Status;
   note: string | undefined;
 };
@@ -678,7 +678,7 @@ export interface Patient extends Models.Document {
 
 export interface Appointment extends Models.Document {
   patient: Patient;
-  schedule: Date;
+  pay: Date;
   status: Status;
   primaryPhysician: string;
   reason: string;
@@ -859,7 +859,7 @@ export const PatientFormValidation = z.object({
 
 export const CreateAppointmentSchema = z.object({
   primaryPhysician: z.string().min(2, "Select at least one doctor"),
-  schedule: z.coerce.date(),
+  pay: z.coerce.date(),
   reason: z
     .string()
     .min(2, "Reason must be at least 2 characters")
@@ -868,9 +868,9 @@ export const CreateAppointmentSchema = z.object({
   cancellationReason: z.string().optional(),
 });
 
-export const ScheduleAppointmentSchema = z.object({
+export const PayAppointmentSchema = z.object({
   primaryPhysician: z.string().min(2, "Select at least one doctor"),
-  schedule: z.coerce.date(),
+  pay: z.coerce.date(),
   reason: z.string().optional(),
   note: z.string().optional(),
   cancellationReason: z.string().optional(),
@@ -878,7 +878,7 @@ export const ScheduleAppointmentSchema = z.object({
 
 export const CancelAppointmentSchema = z.object({
   primaryPhysician: z.string().min(2, "Select at least one doctor"),
-  schedule: z.coerce.date(),
+  pay: z.coerce.date(),
   reason: z.string().optional(),
   note: z.string().optional(),
   cancellationReason: z
@@ -894,7 +894,7 @@ export function getAppointmentSchema(type: string) {
     case "cancel":
       return CancelAppointmentSchema;
     default:
-      return ScheduleAppointmentSchema;
+      return PayAppointmentSchema;
   }
 }
 ```
@@ -987,7 +987,7 @@ export const Doctors = [
 ];
 
 export const StatusIcon = {
-  scheduled: "/assets/icons/check.svg",
+  payd: "/assets/icons/check.svg",
   pending: "/assets/icons/pending.svg",
   cancelled: "/assets/icons/cancelled.svg",
 };
@@ -1021,4 +1021,5 @@ And if you're hungry for more than just a course and want to understand how we l
 </a>
 
 #
+
 # my-credit
